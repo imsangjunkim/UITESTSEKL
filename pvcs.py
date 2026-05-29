@@ -32,21 +32,21 @@ class Pvcs:
     # filepath 파일에서 compvalue가 있나 검사
     @staticmethod
     def check_line_from_file(filepath, target):
-        try:
-            with open(filepath, "r") as file:
-                # 경로 노말라이즈
-                normal_target = os.path.normpath(target.strip())
-                for line in file:
-                    # 공백 샵 무시
-                    if not line.strip() or line.startswith("#"):
-                        continue
-                # 경로 노말라이즈
-                normal_line = os.path.normpath(line.strip())
-                if normal_target == normal_line:
-                    return True
+        if not os.path.exists(filepath):
             return False
-        except Exception as e:
-            print("no file")
+
+        with open(filepath, "r") as file:
+            # 경로 노말라이즈
+            normal_target = os.path.normpath(target.strip())
+            for line in file:
+                # 공백 샵 무시
+                if not line.strip() or line.startswith("#"):
+                    continue
+            # 경로 노말라이즈
+            normal_line = os.path.normpath(line.strip())
+            if normal_target == normal_line:
+                return True
+        return False
 
     @staticmethod
     def add_line_into_file(filepath, new_line):
