@@ -2,30 +2,11 @@ import os
 
 
 # 파일 생성
-def createfile(filepath):
-    if not os.path.exists(filepath):
-        file = open(filepath, "w")
-        file.close()
 
 
-# filepath 파일에서 compvalue가 있나 검사
-def compare_from_file(filepath, target):
-    # 파일이 없는 경우
-    if not os.path.exists(filepath):
-        return False
-    # 경로 노말라이즈
-    normal_target = os.path.normpath(target.strip())
 
-    with open(filepath, "r") as file:
-        for line in file:
-            # 공백 샵 무시
-            if not line.strip() or line.startswith("#"):
-                continue
-        # 경로 노말라이즈
-        normal_line = os.path.normpath(line.strip())
-        if normal_target == normal_line:
-            return True
-    return False
+
+
 
 
 class Pvcs:
@@ -36,6 +17,48 @@ class Pvcs:
         self.IGNOREDIR = ".pvcsignore"  # 무시할 파일
 
     # 리포 초기화
-    def init_repo(self):
-        if not os.path.exists(self.HISTDIR):
-            os.makedirs(self.HISTDIR)
+    @staticmethod
+    def createdirs(filepath):
+        if not os.path.exists(filepath):
+            os.makedirs(filepath)
+
+    # 파일 생성
+    @staticmethod
+    def createfile(filepath):
+        if not os.path.exists(filepath):
+            file = open(filepath, "w")
+            file.close()
+
+    # filepath 파일에서 compvalue가 있나 검사
+    @staticmethod
+    def check_line_from_file(filepath, target):
+        try:
+            with open(filepath, "r") as file:
+                # 경로 노말라이즈
+                normal_target = os.path.normpath(target.strip())
+                for line in file:
+                    # 공백 샵 무시
+                    if not line.strip() or line.startswith("#"):
+                        continue
+                # 경로 노말라이즈
+                normal_line = os.path.normpath(line.strip())
+                if normal_target == normal_line:
+                    return True
+            return False
+        except Exception as e:
+            print("no file")
+
+    @staticmethod
+    def add_line_into_file(filepath, new_line):
+        if not os.path.exists(filepath):
+            return False
+        with open(filepath, "a") as file:
+            file.write("\n" + new_line)
+            return None
+
+if __name__ == "__main__":
+    vcs = Pvcs()
+    vcs.createdirs(vcs.HISTDIR)
+    vcs.createfile(vcs.CONFIGDIR)
+    vcs.createfile(vcs.IGNOREDIR)
+    vcs.add_line_into_file(vcs.CONFIGDIR, ".hello")
