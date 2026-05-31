@@ -1,0 +1,9 @@
+# 어쩌고저쩌고
+.git
+
+# 테스트용
+pvcs.py
+.idea
+.venv
+.gitattributes
+.gitignore
