@@ -1,6 +1,6 @@
 import os
 
-# 추가해야 할 사항: 디렉토리 탐색, 파일 복사, 디렉토리 복사(파일복사와 함계 코밋시 파일 저장), 파일 변경점 검사, 히스트에서 파일 되돌리기
+# 추가해야 할 사항: 파일 복사, 디렉토리 복사(파일복사와 함계 코밋시 파일 저장), 파일 변경점 검사, 히스트에서 파일 되돌리기
 
 class Pvcs:
     # 디렉토리 위치 설정
@@ -64,7 +64,7 @@ class Pvcs:
         normal_target = os.path.normpath(filepath)
         return self.check_line_from_file(self.IGNOREDIR, normal_target, mode)
 
-    # 닷파일 제외 디렉토리 검사
+    # 무시된 파일 제외 디렉토리 검사
     def scan_pwd(self, pwd="."):
         scanned_files = []
 
