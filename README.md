@@ -1,13 +1,13 @@
 # Python version control system
+
 A proof-of-concept version control system for a school project.
 
-## 디자인
-실행 디렉토리에 폴더 .pvcshist와 평문 파일 .pvcsconfig, .pvcsignore를 생성한다.
+## 설계
 
-pvcshist 폴더 내에는 각 코밋 시의 프로젝트를 통째로 복사하여 저장한다(닷파일 제외)
+pwd에는 .pvcsconfig, .pvcsignore 파일과 .pvcshist 디렉토리가 생성된다.
 
-pvcsconfig에는 추적할 파일의 워킹 디렉토리부터의 경로를 저장한다.
+.pvcsconfig에는 추적하고 싶은 파일의 pwd에서부터의 경로가 삽입된다.
 
-pvcsignore에는 변화를 무시할 파일의 경로를 저장한다.
+.pvcsignore에는 무시하고 싶은 파일의 pwd에서부터의 경로가 삽입된다. 디렉토리를 무시한 경우 예하 디렉토리 또한 모두 무시된다.
 
-추가해야 할 사항 파일 복사, 디렉토리 복사(파일복사와 함계 코밋시 파일 저장), 파일 변경점 검사, 히스트에서 파일 되돌리기
+.pvcshist에는 iso 표준 날자로 구분된 예하 디렉토리를 생성해, 사용자가 코밋한 경우 여기에 추적되는 파일을 완전 복사한다.

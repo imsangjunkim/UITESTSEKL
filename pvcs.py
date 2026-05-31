@@ -102,7 +102,7 @@ class Pvcs:
     def check_for_changes(self):
         return False
 
-    #
+    # 추적중인 파일을 iso날자로 구분해 hist에 저장
     def commit(self):
         foldername = datetime.datetime.now(datetime.timezone.utc).isoformat()
         foldername = foldername.replace(":", "-")
